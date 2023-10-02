@@ -21,11 +21,11 @@ public class b13023_ABCDE_re {
 		m = Integer.parseInt(st.nextToken());     // 엣지 수
 		visited = new boolean[n+1];
 		
-		// ArrayList 배열로
+		// ArrayList 배열 객체 생성
 		AL = new ArrayList[n];
-		
+		// ArrayList 인덱스별 객체 생성
 		for(int i = 0; i < n; i++) {
-			AL[i] = new ArrayList<>();
+			AL[i] = new ArrayList<>();  //AL[0] -> 1, 2 이런식으로 인접리스트형식으로 담을거임
 		}
 		
 		for(int i = 0; i < m; i++) {
@@ -35,9 +35,8 @@ public class b13023_ABCDE_re {
 			AL[a].add(b);
 			AL[b].add(a);
 		}
-		visited[0] = true;
 		
-		// 키포인트
+		// 키포인트 - ABCDE가 친구인지 찾아야하는데 A가 0이 아닐 수 도 있음
 		for(int i = 0; i < n; i++) {
 			dfs(i, 1);
 			if(arrive == 1) break;
