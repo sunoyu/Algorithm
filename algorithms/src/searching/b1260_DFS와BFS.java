@@ -35,8 +35,13 @@ public class b1260_DFS와BFS {
 			int b = Integer.parseInt(st.nextToken());
 			AL[a].add(b);
 			AL[b].add(a);
-			Collections.sort(AL[a]);
-			Collections.sort(AL[b]);
+//			Collections.sort(AL[a]);
+//			Collections.sort(AL[b]);
+		}
+		
+		// 이게 좀 더 빠름
+		for(int i = 1; i <= n; i++) {
+			Collections.sort(AL[i]);
 		}
 		
 
