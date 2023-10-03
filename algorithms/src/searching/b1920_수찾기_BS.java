@@ -23,10 +23,12 @@ public class b1920_수찾기_BS {
 		
 		int m = Integer.parseInt(br.readLine());
 		st = new StringTokenizer(br.readLine());
+		StringBuilder sb = new StringBuilder();    //  입출력 sb로 수정하면 시간 반토막!
 		for(int i = 0; i < m; i++) {
 			int key = Integer.parseInt(st.nextToken());
-			System.out.println(BS(arr, key));
+			sb.append(BS(arr, key)).append('\n');
 		}
+		System.out.println(sb);
 		
 	}
 	static int BS(int[] arr, int key) {
