@@ -1,5 +1,5 @@
 package searching;
-
+// BFS
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +26,6 @@ public class b1167_트리의지름 {
 		}
 		
 		for(int i = 1; i <= n; i++) {
-
 			st = new StringTokenizer(br.readLine());
 			int node = Integer.parseInt(st.nextToken());
 			while(st.hasMoreTokens()) {
@@ -41,13 +40,12 @@ public class b1167_트리의지름 {
 		distance = new int[n+1];
 		bfs(1);
 		int max = 1;
-		
 		for(int i = 1; i <=n; i++) {
 			if(distance[max] < distance[i]) {
 				max = i;
 			}
 		}
-		
+		// 임의의 node에서 가장 멀었던 node부터 시작하는 bfs를 실행
 		visited = new boolean[n+1];
 		distance = new int[n+1];
 		bfs(max);
@@ -55,10 +53,11 @@ public class b1167_트리의지름 {
 			if(distance[max] < distance[i]) {
 				max = i;
 			}
-		}
+		}   // -> Arrays.sort로 대체 가능
 		System.out.println(distance[max]);
 		
 	}
+	
 	static void bfs(int node) {
 		Queue<Integer> q = new LinkedList<>();
 		q.add(node);
