@@ -52,6 +52,7 @@ public class b10816_숫자카드2_BS {
 			else lo = mid + 1;
 			*/
 		
+			
 		}
 		return lo;
 		
