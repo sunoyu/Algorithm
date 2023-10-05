@@ -23,7 +23,7 @@ public class b2343 {
 		}
 		System.out.println(BS(arr, m));
 	}
-	
+
 	
 	static int BS(int[] arr, int m) {
 		int lo = arr[n-1];
