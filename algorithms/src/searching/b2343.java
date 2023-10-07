@@ -22,6 +22,7 @@ public class b2343 {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		System.out.println(BS(arr, m));
+		
 	}
 	
 	static int BS(int[] arr, int m) {
