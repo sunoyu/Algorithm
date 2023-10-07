@@ -32,7 +32,6 @@ public class b2343 {
 		for(int i : arr) {
 			hi += i;
 		}
-		
 		while(lo < hi) {
 			int mid = (hi + lo) / 2;
 			count = 0;
