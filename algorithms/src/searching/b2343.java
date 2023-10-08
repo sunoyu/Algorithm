@@ -33,7 +33,7 @@ public class b2343 {
 			hi += i;       // 시작 최대값
 		}
 		
-		while(lo <= hi) {
+		while(lo < hi) {
 			int mid = (hi + lo) / 2;
 			count = 0;
 			sum = 0;
@@ -56,7 +56,7 @@ public class b2343 {
 				lo = mid +1;
 
 			}else {
-				hi = mid -1;
+				hi = mid;
 			}
 		}
 		return lo;
