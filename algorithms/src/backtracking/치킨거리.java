@@ -12,8 +12,8 @@ public class 치킨거리 {
 	static int[] check;
 	static int min;
 	static int dosimin = Integer.MAX_VALUE;
-	static ArrayList<Node> H;
-	static ArrayList<Node> C;
+	static ArrayList<Nodee> H;
+	static ArrayList<Nodee> C;
 //	static ArrayList<Integer> CH;
  
 	public static void main(String[] args) throws IOException {
@@ -32,8 +32,8 @@ public class 치킨거리 {
 			st = new StringTokenizer(br.readLine());
 			for(int j = 0; j < N; j++) {
 				int now = Integer.parseInt(st.nextToken());
-				if(now == 1) H.add(new Node(i,j));         // 집 주소를 저장
-				else if(now == 2) C.add(new Node(i,j));
+				if(now == 1) H.add(new Nodee(i,j));         // 집 주소를 저장
+				else if(now == 2) C.add(new Nodee(i,j));
 			}
 		}
 		
@@ -81,10 +81,10 @@ public class 치킨거리 {
 
 }
 
-class Node{
+class Nodee{
 	int r;
 	int c;
-	Node(int r, int c){
+	Nodee(int r, int c){
 		this.r = r;
 		this.c = c;
 	}
