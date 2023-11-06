@@ -25,7 +25,7 @@ public class 모든순열 {
 		if(depth == N) {
 			for(int v : arr) {
 				sb.append(v).append(" ");
-			}
+			} 
 			sb.append("\n");
 		}
 		 
