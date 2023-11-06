@@ -28,7 +28,7 @@ public class 모든순열 {
 			}
 			sb.append("\n");
 		}
-		
+		 
 		for(int i = 1; i <=N; i++) {
 			if(visited[i]) continue;
 			visited[i] = true;
