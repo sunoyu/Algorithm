@@ -38,6 +38,7 @@ public class N과M5 {
 			for(int i : result) {
 				sb.append(i).append(" ");
 			}
+
 			sb.append("\n");
 			return;
 		}
