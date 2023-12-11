@@ -59,7 +59,7 @@ public class 데이크스트라1_최단거리 {
 				Edge tmp = AL[c_v].get(i);
 				int next = tmp.vertex;
 				int value = tmp.value;
-				if(distance[next] > distance[c_v] + value) {
+				if(distance[next] > distance[c_v] + value) {    // 예: 1-> 2로 갈때, 1에서 2로가는 비용 vs 지금까지 2로가는 최소비용
 					distance[next] = distance[c_v] + value;
 					q.offer(new Edge(next, distance[next]));
 				}
@@ -71,9 +71,6 @@ public class 데이크스트라1_최단거리 {
 			else			System.out.println("INF");
 
 		}
-		
-		
-		
 	}
 
 }
