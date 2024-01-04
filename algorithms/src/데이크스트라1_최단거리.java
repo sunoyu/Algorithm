@@ -45,7 +45,7 @@ public class 데이크스트라1_최단거리 {
 			int w = Integer.parseInt(st.nextToken());
 			AL[u].add(new Edge(v,w));
 		}
-		
+
 		q.offer(new Edge(K, 0));
 		distance[K] = 0;
 
