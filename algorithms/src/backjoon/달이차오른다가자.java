@@ -16,7 +16,7 @@ public class 달이차오른다가자 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-
+ 
         n  = Integer.parseInt(st.nextToken());
         m  = Integer.parseInt(st.nextToken());
         map = new char[n][m];
