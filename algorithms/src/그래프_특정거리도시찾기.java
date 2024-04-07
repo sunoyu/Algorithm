@@ -34,8 +34,11 @@ public class 그래프_특정거리도시찾기 {
             A[start].add(end);
         }
         visited = new int[N + 1];
+        for(int i = 1 ; i <= N; i ++){   // 2번쨰 이후 턴에서 시작노드를 지목하게되면 방문한것으로 판단하지 않고 continue가 안먹히니.. -1로 설정해주고 visited 0으로 세팅
+            visited[i] = -1;
+        }
         answer = new ArrayList<>();
-        bfs();
+        bfs(X);
         for (int i = 1; i <= N; i++) {
             if (visited[i] == K) {
                 answer.add(i);
@@ -48,13 +51,14 @@ public class 그래프_특정거리도시찾기 {
             for (int i : answer) System.out.println(i);
         }
     }
-    private static void bfs(){
+    private static void bfs(int start){
         Queue<Integer> q = new LinkedList<>();
-        q.add(X);
+        q.add(start);
+        visited[start] ++;
         while(!q.isEmpty()) {
             int node = q.poll();
             for (int i : A[node]) {
-                if (visited[i] != 0) continue;
+                if (visited[i] != -1) continue;
                 q.add(i);
                 visited[i] = visited[node] + 1;
             }
