@@ -27,7 +27,7 @@ public class 그래프_물통2251 {
 
         BFS();
 
-        for (int i = 1; i < capa[2] + 1; i++) {
+        for (int i = 0; i <= capa[2]; i++) {    // C의 물이 0인경우도 있다!  3 2 1 일때
             if(answer[i]) System.out.print(i + " ");
         }
     }
