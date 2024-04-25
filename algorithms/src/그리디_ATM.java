@@ -20,10 +20,11 @@ public class 그리디_ATM {
 
         Arrays.sort(arr);
         int sum = 0;
-        for (int i = 1; i <= N; i++) {
-            for (int j = 0; j < i; j++) {
-                sum += arr[j];
-            }
+        int prev = 0;
+        for (int i = 0; i < N; i++) {
+            sum += prev + arr[i];
+            prev += arr[i];
+
         }
         System.out.println(sum);
 
