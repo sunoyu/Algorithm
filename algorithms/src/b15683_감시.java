@@ -7,10 +7,10 @@ import java.util.*;
 
 public class b15683_감시 {
     static int N, M, zero, cnt;
-    static int MAX = Integer.MIN_VALUE;
+    static int MAX = Integer.MIN_VALUE;   // 0의 갯수에서 최대값을 뺴서 사각지대 최소값을 구할 것임
     static int[][] map;
-    static int[] per;
-    static int[] dy = {-1,0,1,0};   // 상 우 하 좌
+    static int[] per;   // 순열을 담는 배열
+    static int[] dy = {-1,0,1,0};   // 상 우 하 좌   90도 회전하는 형태로 구현
     static int[] dx = {0,1,0,-1};
 
 
