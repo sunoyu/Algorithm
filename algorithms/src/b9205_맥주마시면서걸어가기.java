@@ -22,11 +22,11 @@ public class b9205_맥주마시면서걸어가기 {
 
         T = Integer.parseInt(br.readLine());
         for (int t = 0; t < T; t++) {
-            N = Integer.parseInt(br.readLine());
+            N = Integer.parseInt(br.readLine());   // 편의점의 개수 N개, 시작노드 끝노드 각각 1개
             list = new ArrayList<>();
             visited = new boolean[N + 2];
             happy = false;
-            edge = new ArrayList[N+2];
+            edge = new ArrayList[N + 2];
             for (int i = 0; i < N + 2; i++) {
                 edge[i] = new ArrayList();
             }
@@ -36,7 +36,7 @@ public class b9205_맥주마시면서걸어가기 {
                 list.add(new Pos(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())));   // x , y 입력
             }
 
-            // 대조하면서 양방향 그래프 만들기
+            // 맨허튼 거리가 1000이하라면 양방향 그래프 만들기     0,1  0,2  0,3  1,2  1,3  2,3
             for (int i = 0; i < list.size(); i++) {
                 for (int j = i + 1; j < list.size(); j++) {
                     Pos first = list.get(i);
@@ -57,14 +57,14 @@ public class b9205_맥주마시면서걸어가기 {
 
     private static void BFS() {
         Queue<Integer> q = new LinkedList<>();
-        q.add(0);
+        q.add(0); // 시작노드
 
         while (!q.isEmpty()) {
             int now = q.poll();
             for(int next : edge[now]) {
                 if(visited[next]) continue;
                 visited[next] = true;
-                if (next == list.size() - 1) {
+                if (next == list.size() - 1) {  // 끝노드에 도착했다는 의미
                     happy =  true;
                     return;
                 }
