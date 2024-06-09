@@ -1,9 +1,8 @@
-package recursion;
+package dataStructure;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class b25501_재귀의귀재 {
 	static int n, len;
