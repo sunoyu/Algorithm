@@ -89,7 +89,7 @@ public class b16235_나무재테크 {
         List<Tree> newTrees = new ArrayList<>();
 
         // 나이가 5의 배수인 나무가 인접한 8개의 칸에 나이가 1인 나무를 번식시킵니다.
-        for (Tree tree : treeQueue) {
+        for (Tree tree : treeQueue) {    // poll을 하는 것이 아니라 단순 접근만 하는 것!
             if (tree.age % 5 == 0) {
                 for (int i = 0; i < 8; i++) {
                     int ny = tree.y + dy[i];
