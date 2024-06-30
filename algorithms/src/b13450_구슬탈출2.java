@@ -40,7 +40,6 @@ public class b13450_구슬탈출2 {
         System.out.println(bfs(ry, rx, by, bx));
 
 
-
     }
 
     private static int bfs(int ry, int rx, int by, int bx) {
@@ -49,6 +48,8 @@ public class b13450_구슬탈출2 {
 
         while (!q.isEmpty()) {
             Position pos = q.poll();
+
+            if(pos.depth >= 10) return -1;   // 10초 이하를 헷갈리지 말자. 최종 리턴 할 때 depth를 +1 하므로 조건연산자를 >가 아닌 >= 인 경우로 해주어야한다.
 
             for (int i = 0; i < 4; i++) {
                 int[] rolledR = roll(pos.ry, pos.rx, dy[i], dx[i]);
@@ -106,4 +107,3 @@ public class b13450_구슬탈출2 {
         }
     }
 }
-
