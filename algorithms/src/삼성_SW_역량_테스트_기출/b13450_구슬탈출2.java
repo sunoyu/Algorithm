@@ -1,4 +1,4 @@
-package algorithms.src;
+package algorithms.src.삼성_SW_역량_테스트_기출;
 
 
 import java.io.BufferedReader;
