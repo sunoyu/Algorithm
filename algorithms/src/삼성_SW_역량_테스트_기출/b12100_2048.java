@@ -24,6 +24,7 @@ public class b12100_2048 {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
+                MAX = MAX > map[i][j] ? MAX : map[i][j];
             }
         }
 
