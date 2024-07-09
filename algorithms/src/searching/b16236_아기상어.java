@@ -31,14 +31,12 @@ public class b16236_아기상어 {
             StringTokenizer st = new StringTokenizer(br.readLine());
             for (int j = 0; j < N; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                if(map[i][j]==9) {
+                if (map[i][j] == 9) {   // 아기 상어의 위치
                     edge = new Edge(i, j, 0);
                     map[i][j] = 0;
                 };
             }
         }
-
-
 
         BFS();
         System.out.println(minDay);
@@ -50,13 +48,14 @@ public class b16236_아기상어 {
         size = 2;
         eat = 0;
 
-        while (true) {
+        while (true) {  // 1
             boolean isEat = false;
             PriorityQueue<Edge> pq = new PriorityQueue<>();
             pq.add(new Edge(edge.y, edge.x, 0));
             visited = new boolean[N][N];
             visited[edge.y][edge.x] = true;
-            while (!pq.isEmpty()) {
+
+            while (!pq.isEmpty()) { // 2, 먹이를 먹으면 1로
                 edge = pq.poll();
 
                 if(map[edge.y][edge.x] < size && map[edge.y][edge.x] !=0) {
@@ -76,11 +75,9 @@ public class b16236_아기상어 {
                     visited[ny][nx] = true;
                     pq.add(new Edge(ny, nx, edge.day + 1));
 
-                    // 먹이를 먹으면 BFS 재귀
-
-
                 }
             }
+
             if (!isEat) {
                 break;
             }
@@ -109,7 +106,6 @@ public class b16236_아기상어 {
             } else if (this.y != o.y) {
                 return this.y - o.y;   // 날짜가 같으면 위쪽에 있는 거 부터(y 오름차순)
             } else return this.x - o.x;
-
         }
     }
 }

@@ -1,4 +1,4 @@
-package algorithms.src.삼성_SW_역량_테스트_기출;
+package algorithms.src.삼성_SW_역량_테스트_기출; // GPT
 
 import javax.print.DocFlavor;
 import java.io.BufferedReader;
