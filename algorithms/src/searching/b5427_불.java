@@ -15,6 +15,7 @@ public class b5427_불 {
     private static PriorityQueue<Node> runnerQ = new PriorityQueue<>();
     private static char[][] map;
     private static int[][] fireMap;
+    private static boolean[][] visited;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -44,7 +45,7 @@ public class b5427_불 {
                     else if (map[i][j] == '*') fireQ.add(new Node(i, j, 0));
                 }
             }
-            boolean[][] visited = new boolean[H][W];
+            visited = new boolean[H][W];
 
             fire();
 
@@ -62,7 +63,7 @@ public class b5427_불 {
                 int ny = node.y + dy[i];
                 int nx = node.x + dx[i];
                 if(ny < 0 || ny >= H || nx < 0 || nx >= W) return node.time+1;
-                if(map[ny][nx] == '#') continue;
+                if(map[ny][nx] == '#' || visited[ny][nx]) continue;
                 if(fireMap[ny][nx] > node.time+1){
                     runnerQ.add(new Node(ny, nx, node.time + 1));
                 }
