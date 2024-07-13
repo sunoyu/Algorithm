@@ -42,7 +42,10 @@ public class b5427_불 {
                 for (int j = 0; j < W; j++) {
                     map[i][j] = str.charAt(j);
                     if(map[i][j] == '@') runnerQ.add(new Node(i, j, 0));
-                    else if (map[i][j] == '*') fireQ.add(new Node(i, j, 0));
+                    else if (map[i][j] == '*') {
+                        fireQ.add(new Node(i, j, 0));
+                        fireMap[i][j] = 0;
+                    }
                 }
             }
             visited = new boolean[H][W];
@@ -64,9 +67,9 @@ public class b5427_불 {
                 int nx = node.x + dx[i];
                 if(ny < 0 || ny >= H || nx < 0 || nx >= W) return node.time+1;
                 if(map[ny][nx] == '#' || visited[ny][nx]) continue;
-                if(fireMap[ny][nx] > node.time+1){
-                    runnerQ.add(new Node(ny, nx, node.time + 1));
-                }
+                if (fireMap[ny][nx] != -1 && fireMap[ny][nx] <= node.time + 1) continue;
+                visited[ny][nx] = true;
+                runnerQ.add(new Node(ny, nx, node.time + 1));
             }
         }
         return -1;
@@ -75,14 +78,14 @@ public class b5427_불 {
     private static void fire() {
         while (!fireQ.isEmpty()) {
             Node fire = fireQ.poll();
-            fireMap[fire.y][fire.x] = fire.time;
 
             for (int i = 0; i < 4; i++) {
                 int ny = fire.y + dy[i];
                 int nx = fire.x + dx[i];
-                if (ny < 0 || ny >= H || nx < 0 || nx >= W || fireMap[ny][nx] >= 0 || map[ny][nx] == '#') {
+                if (ny < 0 || ny >= H || nx < 0 || nx >= W || fireMap[ny][nx] != -1 || map[ny][nx] == '#') {
                     continue;
                 }
+                fireMap[ny][nx] = fire.time + 1;
                 fireQ.add(new Node(ny, nx, fire.time + 1));
             }
         }
