@@ -31,7 +31,7 @@ public class b2468 {
         }
 
         int MAX = Integer.MIN_VALUE;
-        for (int h = 0; h < highest; h++) {
+        for (int h = 0; h < highest; h++) {    // 비가 안 올 수도 있어서 0부터 시작으로 바꿈
             cnt = 0;
             visited = new boolean[N][N];
             for (int i = 0; i < N; i++) {
