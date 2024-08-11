@@ -17,9 +17,7 @@ public class b17143_낚시왕 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         S = Integer.parseInt(st.nextToken());  // 상어수
-
         map = new Shark[N][M];
-//        q = new LinkedList<>();
 
         for (int i = 0; i < S; i++) {
             st = new StringTokenizer(br.readLine());
@@ -29,7 +27,6 @@ public class b17143_낚시왕 {
             int dir = Integer.parseInt(st.nextToken())-1;
             int size = Integer.parseInt(st.nextToken());
             map[y][x] = new Shark(pace, dir, size);
-//            q.add(new Shark(pace, dir, size));
         }
 
         for (int i = 0; i < M; i++) {
@@ -63,7 +60,6 @@ public class b17143_낚시왕 {
                         if(tmp[ny][nx].sz < map[i][j].sz) tmp[ny][nx] = map[i][j];
                     }
                     else
-//                    tmp[ny][nx] = new Shark(map[i][j].pac, map[i][j].d, map[i][j].sz);
                     tmp[ny][nx] = map[i][j];
                 }
             }
@@ -89,8 +85,6 @@ public class b17143_낚시왕 {
         int d;
         int sz;
         public Shark( int pac, int d, int sz) {
-//            this.y = y;
-//            this.x = x;
             this.pac = pac;
             this.d = d;
             this.sz = sz;
