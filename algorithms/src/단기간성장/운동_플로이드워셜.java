@@ -19,7 +19,7 @@ public class 운동_플로이드워셜 {
         // 초기화 1
         for (int i = 0; i < V; i++) {
             for (int j = 0; j < V; j++) {
-                if(i==j) floydMap[i][j] = INF;
+                if(i==j) floydMap[i][j] = 0;
                 else floydMap[i][j] = INF;  // 무한대로 세팅
             }
         }
@@ -39,7 +39,13 @@ public class 운동_플로이드워셜 {
         }
         int min = INF;
         for (int i = 0; i < V; i++) {
-            min = min < floydMap[i][i] ? min : floydMap[i][i];
+            int tmp = 0;
+            for (int j = 0; j < V; j++) {
+                if (i != j && floydMap[i][j] != INF && floydMap[j][i] != INF) {
+                    tmp = floydMap[i][j] + floydMap[j][i];
+                    min = Math.min(min, tmp);
+                }
+            }
         }
         if(min == INF) System.out.println(-1);
         else System.out.println(min);
