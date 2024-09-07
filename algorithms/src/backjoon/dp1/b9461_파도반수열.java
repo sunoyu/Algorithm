@@ -1,4 +1,4 @@
-package algorithms.src.backjoon;
+package algorithms.src.backjoon.dp1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
