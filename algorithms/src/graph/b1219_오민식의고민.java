@@ -40,8 +40,8 @@ public class b1219_오민식의고민 {
             money[i] = Integer.parseInt(st.nextToken());
         }
 
-        int[] earning = new int[N];
-        Arrays.fill(earning, Integer.MIN_VALUE);
+        long[] earning = new long[N];
+        Arrays.fill(earning, Long.MIN_VALUE);
         earning[S] = money[S]; // 출발지는 0으로
 
         // 최단거리가 아닌 최대 이윤을 남기는 문제이다. 따라서, 기본 배열 세팅을 최댓값이아닌 최솟값으로 세팅
@@ -50,22 +50,22 @@ public class b1219_오민식의고민 {
                 int s = edge[j].s;
                 int e = edge[j].e;
                 int w = edge[j].w;
-                if(earning[s] == Integer.MIN_VALUE) continue;
+                if(earning[s] == Long.MIN_VALUE) continue;
 
-                else if(earning[s] == Integer.MAX_VALUE) earning[e] = Integer.MAX_VALUE;
+                else if(earning[s] == Long.MAX_VALUE) earning[e] = Long.MAX_VALUE;
 
-                // 이윤 배열 업데이트
+                    // 이윤 배열 업데이트
                 else if(earning[s] + money[e] - w > earning[e]) {
                     earning[e] = earning[s] + money[e] - w;
 
-                    if(i >= N-1) earning[e] = Integer.MAX_VALUE;   // 양수 싸이클
+                    if(i >= N-1) earning[e] = Long.MAX_VALUE;   // 양수 싸이클
                 }
             }
         }
 
-        if(earning[E] == Integer.MIN_VALUE) {
+        if(earning[E] == Long.MIN_VALUE) {
             System.out.println("gg");
-        } else if(earning[E] == Integer.MAX_VALUE){
+        } else if(earning[E] == Long.MAX_VALUE){
             System.out.println("Gee");
         } else System.out.println(earning[E]);
 
