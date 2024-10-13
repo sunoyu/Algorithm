@@ -4,15 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
+/*
+6 5 6
+2 3
+2 0
+4 2
+2 0
+2 0
+2 2
+*/
+
 public class 마법의숲탐색 {
-    private static int R,C,K;
+    private static int R,C,K, num,sum;
+
     // 요정을 기준으로 출구 위치
-    static int[] exitY = {-1, 0, 1, 0};  // 북 동 남 서
-    static int[] exitX = {0, -1, 0, 1};
+    static int[] dy = {-1, 0, 1, 0};  // 북 동 남 서
+    static int[] dx = {0, 1, 0, -1};
     static boolean[][] visited;   // 요정이 맵 돌때
     static int[][] map;
     public static void main(String[] args) throws IOException {
@@ -21,113 +31,97 @@ public class 마법의숲탐색 {
         R = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
-        map = new int[R + 1][C + 1];
-        visited = new boolean[R + 1][C + 1];
 
+        initMap();
         for (int idx = 0; idx < K; idx++) {
             st = new StringTokenizer(br.readLine());
             int x = Integer.parseInt(st.nextToken());
             int exit = Integer.parseInt(st.nextToken());
 
-            Queue<Gol> q = new LinkedList<>();
-            q.offer(new Gol(-1, x, exit));
-            while (!q.isEmpty()) {
-                // 가는 방향으로는 골렘의 길이가 +1 더 추가되야함.
-                Gol now = q.poll();
-                // 1. to south
-                int sy = now.y + 1;
-                int sx = now.x;
-                int flag = 0;
-                int num = 1;
+            int fy = 0;
+            int fx = x;
 
-                for (int i = 1; i < 4; i++) {  // r s l
-                    if(sy >= R || sx <=1 || sx >= C) {
-                        flag = 1;
-                        break;
-                    }else if (map[sy + exitY[i]][sx + exitX[i]] != 0) {  // 남쪽으로 이동한 요정을 기준으로 3방향에 골렘이 존재하면
-                        flag = 1;
-                        break;  // To east
-                    }
-                }
-                if (flag == 0) {
-                    q.offer(new Gol(sy, sx, now.exit));
+            while (true) {
+                // to South
+                if (map[fy + 1][fx - 1] + map[fy + 2][fx] + map[fy + 1][fx + 1] == 0) {
+                    fy += 1;
+                } else if (map[fy][fx - 2] + map[fy - 1][fx- 1] + map[fy + 1][fx - 1] + map[fy + 2][fx - 1] + map[fy + 1][fx - 2] == 0) { // 서쪽(왼쪽)
+                    exit = (exit + 5) % 4;
+                    fx -= 1;
+                } else if (map[fy][fx + 2] + map[fy - 1][fx + 1] + map[fy + 1][fx + 1] + map[fy + 2][fx + 1] + map[fy + 1][fx + 2] == 0) { // 동쪽
+                    exit = (exit + 1) % 4;
+                    fx += 1;
                 } else {
-                    // 2. to east R
-                    sy = now.y;
-                    sx = now.x + 1;
-                    flag = 0;
-                    for(int i = 0; i < 2; i++) {  // 북 동 남
-                        if(sy >= R || sx <=1 || sx >= C) {
-                            flag = 1;
-                            break;
-                        } else if (map[sy + exitY[i]][sx + exitX[i]] != 0) {  // 오른쪽으로 이동한 요정을 기준으로 3방향에 골렘이 존재하면
-                            flag = 1;
-                            break;  // To east
-                        }
-                    }
-                    if(flag == 0) {
-                        q.offer(new Gol(sy, sx, (now.exit+1)%4));
+                    if(fy < 2) {
+                        initMap();
                     } else {
-                        // 3. to West L
-                        sy = now.y;
-                        sx = now.x - 1;
-                        flag = 0;
-                        for (int i = 0; i < 3; i++) {
-                            if(sy >= R || sx <=1 || sx >= C) {
-                                flag = 1;
-                                break;
-                            }
-                            else if (map[sy + exitY[i]][sx + exitX[i]] != 0) {  // 왼쪽으로 이동한 요정을 기준으로 3방향에 골렘이 존재하면  / 그냥 북쪽도 함께
-                                flag = 1;
-                                break;
-                            }
-                        }
-                        if(flag == 0) {
-                            q.offer(new Gol(sy, sx, (now.exit + 5) % 4));
-                        } else {
-                            // 남 동 서 모두 통과를 못한 경우
-                            if (now.y <= 1) {
-                                // 골렘이 맵 밖에 있는 경우.
-                                map = new int[R + 1][C + 1];
-                                num = 1;
-                            } else {
-                                for (int i = 0; i < 4; i++) {
-                                    int ny = now.y + exitY[i];
-                                    int nx = now.x + exitX[i];
-                                    if(ny < 1) continue;
-                                    map[ny][nx] = num;
-                                }
-                                num++;
-                            }
+                        break;
+
                         }
 
                     }
-
-
                 }
-
-
-
-
-
-
-
-
+            map[fy][fx] = num + 1;
+            for (int i = 0; i < 4; i++) {
+                int ny = fy + dy[i];
+                int nx = fx + dx[i];
+                map[ny][nx] = num + 1;
             }
+            BFS(fy, fx, exit);
+            num++;
 
         }
+        System.out.println(sum);
 
+
+
+    }
+
+    private static void BFS(int fy, int fx, int exit) {
+        Queue<Gol> q = new LinkedList<>();
+        q.offer(new Gol(fy, fx));
+        int ey = fy + dy[exit];
+        int ex = fx + dx[exit];
+        visited = new boolean[R + 3][C + 2];
+        int max = -1;
+        while (!q.isEmpty()) {
+            Gol cur = q.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int ny = cur.y + dy[i];
+                int nx = cur.x + dx[i];
+                if(visited[ny][nx] || map[ny][nx] == -1) continue;
+                visited[ny][nx] = true;
+                if (map[cur.y][cur.x] == map[ny][nx]) {
+                    q.offer(new Gol(ny, nx));
+                    max = Math.max(max, ny) -1;
+                } else if(cur.y == ey && cur.x == ex) {
+                    q.offer(new Gol(ny, nx));
+                    max = Math.max(max, ny) -1;
+                } else continue;
+            }
+        }
+        sum += max;
+    }
+
+    private static void initMap() {
+        map = new int[R + 3][C + 2];   // 요정기준 상단 -2에서 시작하므로,  + 아래와 좌우에 경계를 -1로 세팅해줄것
+        for (int i = 0; i < R+3; i++) {
+            map[i][0] = -1;
+            map[i][C + 1] = -1;
+        }
+        for (int j = 0; j < C + 2; j++) {
+            map[R + 2][j] = -1;
+        }
     }
 
     private static class Gol {
         int y;
         int x;
-        int exit;
 
-        public Gol(int y, int x, int exit) {
+        public Gol(int y, int x) {
             this.y = y;
             this.x = x;
-            this.exit = exit;
         }
     }
 }
