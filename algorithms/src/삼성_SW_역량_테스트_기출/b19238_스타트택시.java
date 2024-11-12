@@ -10,8 +10,8 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class b19238_스타트택시 {
-    private static int N, M;
-    private static int[] dy = {-1, 0, 0, 1};   // 상 좌 우 하
+    private static int N, M;  // N*N 배열, M개의 승객
+    private static int[] dy = {-1, 0, 0, 1};   // 상 좌 우 하   ->  행이 낮은순, 열이 낮은순으로 우선 탑승
     private static int[] dx = {0, -1, 1, 0};
 
     static int[][] map;
@@ -27,7 +27,7 @@ public class b19238_스타트택시 {
         M = Integer.parseInt(st.nextToken());
         gas = Integer.parseInt(st.nextToken());
         map = new int[N][N];
-        dest = new Dest[M + 2];  // 벽이 1이므로 손님넘버는 2부터 시작하자.
+        dest = new Dest[M + 2];  // 맵에서 주어지는 벽이 1이므로 손님 넘버는 2부터 시작하자.
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -35,12 +35,12 @@ public class b19238_스타트택시 {
                 map[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-        st = new StringTokenizer(br.readLine());  // 시작점
 
+        st = new StringTokenizer(br.readLine());  // 시작점
         sty = Integer.parseInt(st.nextToken())-1;
         stx = Integer.parseInt(st.nextToken())-1;
 
-
+        // 손님의 위치와 목적지를 담아준다.
         for (int i = 2; i <= M + 1; i++) {
             st = new StringTokenizer(br.readLine());
             map[Integer.parseInt(st.nextToken())-1][Integer.parseInt(st.nextToken())-1] = i;
@@ -59,8 +59,7 @@ public class b19238_스타트택시 {
             boolean isTake = (findGuest(sty, stx, gas));
             int gas1 = gas;  // 손님을 태울 때 까지 연료를 쓰고 남은 양.
             if (isTake) {
-//                map[sty][stx] = 0;
-                boolean isArrive = findDest(new Node(sty, stx, gas, guest));   // 손님을 도착지까지 데려다주고 남은 연료량이 gas에 .
+                boolean isArrive = findDest(new Node(sty, stx, gas, guest));   // 손님을 도착지까지 데려다주고 남은 연료량이 gas에 / 참고로 sty 이하 모든 변수는 findGuest에서 재정의 되었음.
                 if (isArrive) {
                     gas += (gas1 - gas) * 2;
                     cnt++;
@@ -82,7 +81,7 @@ public class b19238_스타트택시 {
 
     }
 
-
+// 정리 - 택시가 시작점부터 모두 순회하면서 모든 손님을 우선순위큐에 담는다. 가장 우선순위가 높은 손님을 사용한다.
     private static boolean findGuest(int y, int x, int restGas) {    // boolean이 나으려나? 그렇겠다.
         Queue<Node> q = new LinkedList<>();
         PriorityQueue<Node> pq = new PriorityQueue<>();
@@ -103,7 +102,7 @@ public class b19238_스타트택시 {
                     continue;
                 }
                 visited[ny][nx] = true;
-                q.add(new Node(ny, nx, node.gas - 1, map[ny][nx] > 1 ? map[ny][nx] : 0));
+                q.add(new Node(ny, nx, node.gas - 1, map[ny][nx] > 1 ? map[ny][nx] : 0));   // 손님이 있는경우 손님 넘버도 추가
             }
         }
 
@@ -117,45 +116,10 @@ public class b19238_스타트택시 {
             map[sty][stx] = 0;  // 손님을 태움
             return true;
         }
-
-
-
-//        while (!q.isEmpty()) {
-//            Node node = q.poll();
-//            if (map[node.y][node.x] > 1) {
-//                sty = node.y;
-//                stx = node.x;
-//                guest = map[node.y][node.x];
-//                gas = node.gas;
-//                map[node.y][node.x] = 0; // 빈공간으로 만들어주고 (태워주고)
-//                return true;
-//            }
-//
-//            for (int i = 0; i < 4; i++) {
-//                int ny = node.y + dy[i];
-//                int nx = node.x + dx[i];
-//                if (ny < 0 || nx < 0 || ny >= N || nx >= N || visited[ny][nx] || map[ny][nx] == 1 || node.gas == 0) {
-//                    continue;
-//                }
-//                visited[ny][nx] = true;
-//
-//                if (map[ny][nx] > 1) {   // 다음칸에 손님이 있는경우
-//                    pq.add(new Node(ny, nx, node.gas - 1, map[ny][nx]));
-//                } else q.add(new Node(ny, nx, node.gas - 1, 0));
-//            }
-//            while (!pq.isEmpty()) {
-//                Node guestP = pq.poll();
-//                sty = guestP.y;
-//                stx = guestP.x;
-//                gas = guestP.gas ;
-//                guest = map[sty][stx];
-//                map[sty][stx] = 0; // 빈공간으로 만들어주고 (태워주고)
-//                return true;
-//            }
-//
-//        }
         return false;
     }
+
+
 
     private static boolean findDest(Node fg) {
         Queue<Node> q = new LinkedList<>();
